@@ -332,7 +332,8 @@ function isValidUrl(url: string): boolean {
 	try {
 		const parsedUrl = new URL(url);
 		return !!parsedUrl.host && ['http:', 'https:'].includes(parsedUrl.protocol);
-	} catch {
-		return false;
+	} catch (e) {
+		if (e instanceof Error) throw new Error('Unable to parse or verify URL', e);
+		throw new Error('Unable to parse or verify URL: Unknown Error');
 	}
 }
