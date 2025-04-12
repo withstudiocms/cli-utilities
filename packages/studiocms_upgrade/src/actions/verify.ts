@@ -1,12 +1,12 @@
 import dns from 'node:dns/promises';
 import { existsSync } from 'node:fs';
 import { readFile } from 'node:fs/promises';
+import { getRegistry } from '@withstudiocms/cli-kit/utils';
 import chalk from 'chalk';
 import semverCoerce from 'semver/functions/coerce.js';
 import semverDiff from 'semver/functions/diff.js';
 import semverParse from 'semver/functions/parse.js';
 import type { Context, PackageInfo } from '../utils/context';
-import { getRegistry } from '../utils/getRegistry';
 
 export async function verify(
 	ctx: Pick<Context, 'version' | 'packages' | 'cwd' | 'dryRun' | 'exit' | 'prompt'>

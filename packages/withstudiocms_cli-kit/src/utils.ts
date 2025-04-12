@@ -14,6 +14,7 @@ import type { Readable } from 'node:stream';
 import { text as textFromStream } from 'node:stream/consumers';
 import { fileURLToPath } from 'node:url';
 import type * as p from '@clack/prompts';
+import { detect } from 'package-manager-detector/detect';
 import { NonZeroExitError, type Options, x } from 'tinyexec';
 
 interface ExecError extends Error {
@@ -269,4 +270,33 @@ export function exitIfEmptyTasks(items: any[], label: string, prompts: typeof p)
 	if (items.length !== 0) return;
 	prompts.log.warn(`No ${label} selected, exiting...`);
 	process.exit(0);
+}
+
+export function readJson<T>(path: string | URL): T {
+	return JSON.parse(fs.readFileSync(path, 'utf-8'));
+}
+
+// Users might lack access to the global npm registry, this function
+// checks the user's project type and will return the proper npm registry
+//
+// This function is adapted from similar utilities in other projects
+let _registry: string;
+export async function getRegistry(): Promise<string> {
+	if (_registry) return _registry;
+	const fallback = 'https://registry.npmjs.org';
+	const packageManager = (await detect())?.name || 'npm';
+	try {
+		const { stdout } = await exec(packageManager, ['config', 'get', 'registry']);
+		_registry = stdout.trim()?.replace(/\/$/, '') || fallback;
+		// Detect cases where the shell command returned a non-URL (e.g. a warning)
+		try {
+			const url = new URL(_registry);
+			if (!url.host || !['http:', 'https:'].includes(url.protocol)) _registry = fallback;
+		} catch {
+			_registry = fallback;
+		}
+	} catch {
+		_registry = fallback;
+	}
+	return _registry;
 }
