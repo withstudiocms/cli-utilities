@@ -30,7 +30,6 @@ export async function getContext(
 	version = 'latest',
 	flags?: {
 		dryRun?: true | undefined;
-		color?: boolean | undefined;
 	}
 ): Promise<Context> {
 	let packageManager: DetectResult | null = null;

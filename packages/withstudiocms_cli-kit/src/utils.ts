@@ -317,7 +317,12 @@ export async function getRegistry(): Promise<string> {
 			_registry = output;
 			return _registry;
 		}
-	} catch {}
+	} catch (error) {
+		// Log the error or provide debug info but continue with the fallback
+		console.debug(
+			`Failed to get registry from package manager, using fallback: ${error instanceof Error ? error.message : 'Unknown error'}`
+		);
+	}
 
 	_registry = fallback;
 	return fallback;
