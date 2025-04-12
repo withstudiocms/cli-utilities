@@ -33,11 +33,20 @@ export async function getContext(
 		color?: boolean | undefined;
 	}
 ): Promise<Context> {
-	const packageManager = (await detect({
-		// Include the `install-metadata` strategy to have the package manager that's
-		// used for installation take precedence
-		strategies: ['install-metadata', 'lockfile', 'packageManager-field'],
-	})) ?? { agent: 'npm', name: 'npm' };
+	let packageManager: DetectResult | null = null;
+	try {
+		packageManager = await detect({
+			// Include the `install-metadata` strategy to have the package manager that's
+			// used for installation take precedence
+			strategies: ['install-metadata', 'lockfile', 'packageManager-field'],
+		});
+	} catch (error) {
+		console.warn(
+			'Failed to detect package manager:',
+			error instanceof Error ? error.message : String(error)
+		);
+	}
+	packageManager = packageManager ?? { agent: 'npm', name: 'npm' };
 	return {
 		prompt,
 		packageManager,

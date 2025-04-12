@@ -273,7 +273,13 @@ export function exitIfEmptyTasks(items: any[], label: string, prompts: typeof p)
 }
 
 export type ReadFileSyncPathParam = Parameters<typeof fs.readFileSync>[0];
-
+/**
+ * Read and parse a JSON file.
+ *
+ * @param path - Path to the JSON file
+ * @returns Parsed JSON content with type T
+ * @throws Error if the file doesn't exist or contains invalid JSON
+ */
 export function readJson<T>(path: ReadFileSyncPathParam): T {
 	try {
 		return JSON.parse(fs.readFileSync(path, 'utf-8'));
@@ -291,22 +297,37 @@ export function readJson<T>(path: ReadFileSyncPathParam): T {
 //
 // This function is adapted from similar utilities in other projects
 let _registry: string;
+
+/**
+ * Get the npm registry URL based on the user's package manager configuration.
+ *
+ * @returns A Promise that resolves to the registry URL
+ */
 export async function getRegistry(): Promise<string> {
 	if (_registry) return _registry;
+
 	const fallback = 'https://registry.npmjs.org';
-	const packageManager = (await detect())?.name || 'npm';
+
 	try {
+		const packageManager = (await detect())?.name || 'npm';
 		const { stdout } = await exec(packageManager, ['config', 'get', 'registry']);
-		_registry = stdout.trim()?.replace(/\/$/, '') || fallback;
-		// Detect cases where the shell command returned a non-URL (e.g. a warning)
-		try {
-			const url = new URL(_registry);
-			if (!url.host || !['http:', 'https:'].includes(url.protocol)) _registry = fallback;
-		} catch {
-			_registry = fallback;
+		const output = stdout.trim()?.replace(/\/$/, '');
+
+		if (output && isValidUrl(output)) {
+			_registry = output;
+			return _registry;
 		}
+	} catch {}
+
+	_registry = fallback;
+	return fallback;
+}
+
+function isValidUrl(url: string): boolean {
+	try {
+		const parsedUrl = new URL(url);
+		return !!parsedUrl.host && ['http:', 'https:'].includes(parsedUrl.protocol);
 	} catch {
-		_registry = fallback;
+		return false;
 	}
-	return _registry;
 }
