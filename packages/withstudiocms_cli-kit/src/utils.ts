@@ -272,8 +272,18 @@ export function exitIfEmptyTasks(items: any[], label: string, prompts: typeof p)
 	process.exit(0);
 }
 
-export function readJson<T>(path: string | URL): T {
-	return JSON.parse(fs.readFileSync(path, 'utf-8'));
+export type ReadFileSyncPathParam = Parameters<typeof fs.readFileSync>[0];
+
+export function readJson<T>(path: ReadFileSyncPathParam): T {
+	try {
+		return JSON.parse(fs.readFileSync(path, 'utf-8'));
+	} catch (error) {
+		if (error instanceof Error) {
+			// Better error message including the path
+			throw new Error(`Failed to read or parse JSON file at ${path}: ${error.message}`);
+		}
+		throw new Error(`Failed to read or parse JSON file at ${path}: Unknown Error`);
+	}
 }
 
 // Users might lack access to the global npm registry, this function
