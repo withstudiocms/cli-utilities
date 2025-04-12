@@ -7,7 +7,7 @@
   },
   "scripts": {
     "knip": "knip",
-    "build": "pnpm --filter create-studiocms --filter '@withstudiocms/*' run build",
+    "build": "pnpm --filter create-studiocms --filter '@withstudiocms/*' --filter '@studiocms/*' run build",
     "test:create-studiocms": "node ./packages/create-studiocms/create-studiocms.mjs",
     "test": "vitest run --reporter=default --reporter=html",
     "lint": "biome check .",
