@@ -102,7 +102,6 @@ describe('install', () => {
 			],
 		};
 		await install(context);
-		console.log(ctx.messages);
 		expect(ctx.messages.includes('      ▲  studiocms can be updated  from v1.0.0 to v2.0.0 ')).toBe(
 			true
 		);
@@ -130,7 +129,6 @@ describe('install', () => {
 		};
 		// @ts-ignore
 		await install(context);
-		console.log(ctx.messages);
 		expect(ctx.messages.includes('      ▲  studiocms can be updated  from v1.0.0 to v2.0.0 ')).toBe(
 			true
 		);
@@ -167,7 +165,6 @@ describe('install', () => {
 		};
 		// @ts-ignore
 		await install(context);
-		console.log(ctx.messages);
 		expect(ctx.messages.includes('      ▲  a can be updated  from v1.0.0 to v2.0.0 ')).toBe(true);
 		expect(ctx.messages.includes('      ▲  b can be updated  from v6.0.0 to v7.0.0 ')).toBe(true);
 		expect(exitCode).toBeUndefined();
@@ -213,7 +210,6 @@ describe('install', () => {
 		};
 		// @ts-ignore
 		await install(context);
-		console.log(ctx.messages);
 		expect(ctx.messages.includes('current is up to date on, v1.0.0')).toBe(true);
 		expect(ctx.messages.includes('      ●  patch can be updated from v1.0.0 to v1.0.1')).toBe(true);
 		expect(ctx.messages.includes('      ●  minor can be updated from v1.0.0 to v1.2.0')).toBe(true);
