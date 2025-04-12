@@ -24,7 +24,7 @@ export async function install(
 		const tag = /^\d/.test(packageInfo.targetVersion)
 			? packageInfo.targetVersion
 			: packageInfo.targetVersion.slice(1);
-		ctx.prompt.log.info(`${packageInfo.name} is up to date on, v${tag}`);
+		ctx.prompt.log.info(`${packageInfo.name} is up to date on v${tag}`);
 		await sleep(random(50, 150));
 	}
 
@@ -102,10 +102,10 @@ function sortPackages(a: PackageInfo, b: PackageInfo): number {
 const success = async (prefix: string, text: string, ctx: Pick<Context, 'prompt'>) => {
 	const length = 10 + prefix.length + text.length;
 	if (length > process.stdout.columns) {
-		ctx.prompt.log.success(`${' '.repeat(5)} ${chalk.green('✔')}  ${prefix}`);
-		ctx.prompt.log.success(`${' '.repeat(9)}${chalk.dim(text)}`);
+		ctx.prompt.log.success(`${chalk.green('✔')}  ${prefix}`);
+		ctx.prompt.log.success(`${' '.repeat(4)}${chalk.dim(text)}`);
 	} else {
-		ctx.prompt.log.success(`${' '.repeat(5)} ${chalk.green('✔')}  ${prefix} ${chalk.dim(text)}`);
+		ctx.prompt.log.success(`${chalk.green('✔')}  ${prefix} ${chalk.dim(text)}`);
 	}
 };
 
@@ -122,12 +122,10 @@ const upgrade = async (packageInfo: PackageInfo, text: string, ctx: Pick<Context
 
 	const length = 12 + name.length + text.length + version.length;
 	if (length > process.stdout.columns) {
-		ctx.prompt.log.info(`${' '.repeat(5)} ${style(symbol)}  ${name}`);
-		ctx.prompt.log.info(`${' '.repeat(9)}${chalk.dim(text)} ${bg(version)}`);
+		ctx.prompt.log.info(`${style(symbol)}  ${name}`);
+		ctx.prompt.log.info(`${' '.repeat(4)}${chalk.dim(text)} ${bg(version)}`);
 	} else {
-		ctx.prompt.log.info(
-			`${' '.repeat(5)} ${style(symbol)}  ${name} ${chalk.dim(text)} ${bg(version)}`
-		);
+		ctx.prompt.log.info(`${style(symbol)}  ${name} ${chalk.dim(text)} ${bg(version)}`);
 	}
 };
 
@@ -144,10 +142,10 @@ const changelog = async (name: string, text: string, url: string, ctx: Pick<Cont
 
 	const length = 12 + name.length + linkLength;
 	if (length > process.stdout.columns) {
-		ctx.prompt.log.info(`${' '.repeat(5)} ${symbol}  ${name}`);
-		ctx.prompt.log.info(`${' '.repeat(9)}${chalk.cyan(chalk.underline(link))}`);
+		ctx.prompt.log.info(`${symbol}  ${name}`);
+		ctx.prompt.log.info(`${' '.repeat(4)}${chalk.cyan(chalk.underline(link))}`);
 	} else {
-		ctx.prompt.log.info(`${' '.repeat(5)} ${symbol}  ${name} ${chalk.cyan(chalk.underline(link))}`);
+		ctx.prompt.log.info(`${symbol}  ${name} ${chalk.cyan(chalk.underline(link))}`);
 	}
 };
 

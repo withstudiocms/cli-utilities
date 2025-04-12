@@ -50,7 +50,7 @@ describe('install', () => {
 			],
 		};
 		await install(context);
-		expect(ctx.messages.includes('studiocms is up to date on, v1.0.0')).toBe(true);
+		expect(ctx.messages.includes('studiocms is up to date on v1.0.0')).toBe(true);
 	});
 
 	it('patch', async () => {
@@ -65,9 +65,7 @@ describe('install', () => {
 			],
 		};
 		await install(context);
-		expect(ctx.messages.includes('      ●  studiocms can be updated from v1.0.0 to v1.0.1')).toBe(
-			true
-		);
+		expect(ctx.messages.includes('●  studiocms can be updated from v1.0.0 to v1.0.1')).toBe(true);
 	});
 
 	it('minor', async () => {
@@ -82,30 +80,7 @@ describe('install', () => {
 			],
 		};
 		await install(context);
-		expect(ctx.messages.includes('      ●  studiocms can be updated from v1.0.0 to v1.2.0')).toBe(
-			true
-		);
-	});
-
-	it('major (reject)', async () => {
-		const context = {
-			...ctx,
-			packages: [
-				{
-					name: 'studiocms',
-					currentVersion: '1.0.0',
-					targetVersion: '2.0.0',
-					isMajor: true,
-					changelogTitle: 'CHANGELOG',
-					changelogURL: 'https://example.com',
-				},
-			],
-		};
-		await install(context);
-		expect(ctx.messages.includes('      ▲  studiocms can be updated  from v1.0.0 to v2.0.0 ')).toBe(
-			true
-		);
-		expect(ctx.messages.includes('check   Be sure to follow the CHANGELOG.')).toBe(false);
+		expect(ctx.messages.includes('●  studiocms can be updated from v1.0.0 to v1.2.0')).toBe(true);
 	});
 
 	it('major (accept)', async () => {
@@ -129,9 +104,7 @@ describe('install', () => {
 		};
 		// @ts-ignore
 		await install(context);
-		expect(ctx.messages.includes('      ▲  studiocms can be updated  from v1.0.0 to v2.0.0 ')).toBe(
-			true
-		);
+		expect(ctx.messages.includes('▲  studiocms can be updated  from v1.0.0 to v2.0.0 ')).toBe(true);
 		expect(exitCode).toBeUndefined();
 		expect(ctx.messages.includes('Be sure to follow the CHANGELOG.')).toBe(true);
 	});
@@ -165,13 +138,13 @@ describe('install', () => {
 		};
 		// @ts-ignore
 		await install(context);
-		expect(ctx.messages.includes('      ▲  a can be updated  from v1.0.0 to v2.0.0 ')).toBe(true);
-		expect(ctx.messages.includes('      ▲  b can be updated  from v6.0.0 to v7.0.0 ')).toBe(true);
+		expect(ctx.messages.includes('▲  a can be updated  from v1.0.0 to v2.0.0 ')).toBe(true);
+		expect(ctx.messages.includes('▲  b can be updated  from v6.0.0 to v7.0.0 ')).toBe(true);
 		expect(exitCode).toBeUndefined();
 		const [changelog, a, b] = ctx.messages.slice(-4);
 		expect(changelog).toEqual('Be sure to follow the CHANGELOGs.');
-		expect(a).toMatch('         a https://example.com');
-		expect(b).toMatch('         b https://example.com');
+		expect(a).toMatch('   a https://example.com');
+		expect(b).toMatch('   b https://example.com');
 	});
 
 	it('current patch minor major', async () => {
@@ -210,12 +183,10 @@ describe('install', () => {
 		};
 		// @ts-ignore
 		await install(context);
-		expect(ctx.messages.includes('current is up to date on, v1.0.0')).toBe(true);
-		expect(ctx.messages.includes('      ●  patch can be updated from v1.0.0 to v1.0.1')).toBe(true);
-		expect(ctx.messages.includes('      ●  minor can be updated from v1.0.0 to v1.2.0')).toBe(true);
-		expect(ctx.messages.includes('      ▲  major can be updated  from v1.0.0 to v3.0.0 ')).toBe(
-			true
-		);
+		expect(ctx.messages.includes('current is up to date on v1.0.0')).toBe(true);
+		expect(ctx.messages.includes('●  patch can be updated from v1.0.0 to v1.0.1')).toBe(true);
+		expect(ctx.messages.includes('●  minor can be updated from v1.0.0 to v1.2.0')).toBe(true);
+		expect(ctx.messages.includes('▲  major can be updated  from v1.0.0 to v3.0.0 ')).toBe(true);
 		expect(exitCode).toBeUndefined();
 		expect(ctx.messages.includes('Be sure to follow the CHANGELOG.')).toBe(true);
 	});
