@@ -1,7 +1,7 @@
 import { StudioCMSColorwayError } from '@withstudiocms/cli-kit/colors';
 import { Command, Option } from '@withstudiocms/cli-kit/commander';
 import { CLITitle, termPrefix } from '@withstudiocms/cli-kit/messages';
-import pathUtil from '@withstudiocms/cli-kit/utils';
+import { pathUtil } from '@withstudiocms/cli-kit/utils';
 import chalk from 'chalk';
 import readJson from './utils/readJson.js';
 
