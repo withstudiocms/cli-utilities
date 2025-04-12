@@ -27,8 +27,8 @@ export interface PackageInfo {
 }
 
 export async function getContext(
-	version: string,
-	flags: {
+	version = 'latest',
+	flags?: {
 		dryRun?: true | undefined;
 		color?: boolean | undefined;
 	}
@@ -43,7 +43,7 @@ export async function getContext(
 		packageManager,
 		packages: [],
 		cwd: new URL(`${pathToFileURL(process.cwd())}/`),
-		dryRun: flags.dryRun || false,
+		dryRun: flags?.dryRun || false,
 		version,
 		exit(code) {
 			process.exit(code);

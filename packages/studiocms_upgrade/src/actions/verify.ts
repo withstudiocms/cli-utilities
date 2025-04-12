@@ -65,13 +65,12 @@ async function verifyStudioCMSProject(ctx: Pick<Context, 'cwd' | 'version' | 'pa
 	return true;
 }
 
-function isAstroPackage(name: string, _version: string) {
-	return name === 'astro' || name.startsWith('@astrojs/');
-}
-
 function isStudioCMSPackage(name: string, _version: string) {
 	return (
-		name === 'studiocms' || name.startsWith('@studiocms/') || name.startsWith('@withstudiocms/')
+		name === 'studiocms' ||
+		name.startsWith('@studiocms/') ||
+		name === 'astro' ||
+		name.startsWith('@astrojs/')
 	);
 }
 
@@ -84,7 +83,7 @@ function isValidVersion(_name: string, version: string) {
 }
 
 function isSupportedPackage(name: string, version: string): boolean {
-	for (const validator of [isStudioCMSPackage, isAstroPackage, isAllowedPackage, isValidVersion]) {
+	for (const validator of [isStudioCMSPackage, isAllowedPackage, isValidVersion]) {
 		if (!validator(name, version)) return false;
 	}
 	return true;

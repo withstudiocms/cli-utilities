@@ -9,7 +9,9 @@ import terminalLink from 'terminal-link';
 import type { Context, PackageInfo } from '../utils/context';
 import { celebrations, done } from '../utils/messages';
 
-export async function install(ctx: Context) {
+export async function install(
+	ctx: Pick<Context, 'prompt' | 'packageManager' | 'cwd' | 'exit' | 'tasks' | 'packages' | 'dryRun'>
+) {
 	ctx.prompt.note(
 		`\n${label('StudioCMS', chalk.bgGreen, chalk.black)}  ${chalk.bold(
 			'Package upgrade in progress.'
@@ -22,7 +24,7 @@ export async function install(ctx: Context) {
 		const tag = /^\d/.test(packageInfo.targetVersion)
 			? packageInfo.targetVersion
 			: packageInfo.targetVersion.slice(1);
-		ctx.prompt.log.info(`${packageInfo.name} is up to date on', v${tag}`);
+		ctx.prompt.log.info(`${packageInfo.name} is up to date on, v${tag}`);
 		await sleep(random(50, 150));
 	}
 
@@ -97,7 +99,7 @@ function sortPackages(a: PackageInfo, b: PackageInfo): number {
 	return a.name.localeCompare(b.name);
 }
 
-const success = async (prefix: string, text: string, ctx: Context) => {
+const success = async (prefix: string, text: string, ctx: Pick<Context, 'prompt'>) => {
 	const length = 10 + prefix.length + text.length;
 	if (length > process.stdout.columns) {
 		ctx.prompt.log.success(`${' '.repeat(5)} ${chalk.green('✔')}  ${prefix}`);
@@ -107,7 +109,7 @@ const success = async (prefix: string, text: string, ctx: Context) => {
 	}
 };
 
-const upgrade = async (packageInfo: PackageInfo, text: string, ctx: Context) => {
+const upgrade = async (packageInfo: PackageInfo, text: string, ctx: Pick<Context, 'prompt'>) => {
 	const { name, isMajor = false, targetVersion, currentVersion } = packageInfo;
 
 	const bg = isMajor ? (v: string) => chalk.bgYellow(chalk.black(` ${v} `)) : chalk.green;
@@ -135,7 +137,7 @@ function pluralize(word: string | [string, string], n: number) {
 	return plural;
 }
 
-const changelog = async (name: string, text: string, url: string, ctx: Context) => {
+const changelog = async (name: string, text: string, url: string, ctx: Pick<Context, 'prompt'>) => {
 	const link = terminalLink(text, url, { fallback: () => url });
 	const linkLength = terminalLink.isSupported ? text.length : url.length;
 	const symbol = ' ';
@@ -150,7 +152,7 @@ const changelog = async (name: string, text: string, url: string, ctx: Context) 
 };
 
 async function runInstallCommand(
-	ctx: Context,
+	ctx: Pick<Context, 'prompt' | 'packageManager' | 'cwd' | 'exit' | 'tasks'>,
 	dependencies: PackageInfo[],
 	devDependencies: PackageInfo[]
 ) {

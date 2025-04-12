@@ -9,6 +9,9 @@ import { getContext } from './utils/context';
 import { bye, celebrations, done } from './utils/messages';
 import readJson from './utils/readJson';
 
+export { collectPackageInfo } from './actions/verify';
+export { install, verify, getContext };
+
 const pkgJson = readJson<{ version: string }>(new URL('../package.json', import.meta.url));
 
 await new Command('upgrade')
