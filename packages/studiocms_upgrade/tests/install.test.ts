@@ -1,9 +1,7 @@
-import * as prompts from '@clack/prompts';
 import type { DetectResult } from 'package-manager-detector';
 import { describe, expect, it } from 'vitest';
 import { install } from '../src/actions/install';
 import type { Context } from '../src/utils/context';
-import { setup } from './utils.js';
 
 describe('install', () => {
 	// const fixture = setup();
@@ -130,6 +128,7 @@ describe('install', () => {
 				},
 			],
 		};
+		// @ts-ignore
 		await install(context);
 		console.log(ctx.messages);
 		expect(ctx.messages.includes('      ▲  studiocms can be updated  from v1.0.0 to v2.0.0 ')).toBe(
@@ -166,6 +165,7 @@ describe('install', () => {
 				},
 			],
 		};
+		// @ts-ignore
 		await install(context);
 		console.log(ctx.messages);
 		expect(ctx.messages.includes('      ▲  a can be updated  from v1.0.0 to v2.0.0 ')).toBe(true);
@@ -211,6 +211,7 @@ describe('install', () => {
 				},
 			],
 		};
+		// @ts-ignore
 		await install(context);
 		console.log(ctx.messages);
 		expect(ctx.messages.includes('current is up to date on, v1.0.0')).toBe(true);
