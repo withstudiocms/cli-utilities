@@ -49,5 +49,5 @@ export async function getContext(
 			process.exit(code);
 		},
 		tasks: [],
-	} satisfies Context;
+	};
 }
