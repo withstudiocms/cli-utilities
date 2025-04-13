@@ -14,6 +14,7 @@ import type { Readable } from 'node:stream';
 import { text as textFromStream } from 'node:stream/consumers';
 import { fileURLToPath } from 'node:url';
 import type * as p from '@clack/prompts';
+import { detect } from 'package-manager-detector/detect';
 import { NonZeroExitError, type Options, x } from 'tinyexec';
 
 interface ExecError extends Error {
@@ -269,4 +270,70 @@ export function exitIfEmptyTasks(items: any[], label: string, prompts: typeof p)
 	if (items.length !== 0) return;
 	prompts.log.warn(`No ${label} selected, exiting...`);
 	process.exit(0);
+}
+
+export type ReadFileSyncPathParam = Parameters<typeof fs.readFileSync>[0];
+/**
+ * Read and parse a JSON file.
+ *
+ * @param path - Path to the JSON file
+ * @returns Parsed JSON content with type T
+ * @throws Error if the file doesn't exist or contains invalid JSON
+ */
+export function readJson<T>(path: ReadFileSyncPathParam): T {
+	try {
+		return JSON.parse(fs.readFileSync(path, 'utf-8'));
+	} catch (error) {
+		if (error instanceof Error) {
+			// Better error message including the path
+			throw new Error(`Failed to read or parse JSON file at ${path}: ${error.message}`);
+		}
+		throw new Error(`Failed to read or parse JSON file at ${path}: Unknown Error`);
+	}
+}
+
+// Users might lack access to the global npm registry, this function
+// checks the user's project type and will return the proper npm registry
+//
+// This function is adapted from similar utilities in other projects
+let _registry: string;
+
+/**
+ * Get the npm registry URL based on the user's package manager configuration.
+ *
+ * @returns A Promise that resolves to the registry URL
+ */
+export async function getRegistry(): Promise<string> {
+	if (_registry) return _registry;
+
+	const fallback = 'https://registry.npmjs.org';
+
+	try {
+		const packageManager = (await detect())?.name || 'npm';
+		const { stdout } = await exec(packageManager, ['config', 'get', 'registry']);
+		const output = stdout.trim()?.replace(/\/$/, '');
+
+		if (output && isValidUrl(output)) {
+			_registry = output;
+			return _registry;
+		}
+	} catch (error) {
+		// Log the error or provide debug info but continue with the fallback
+		console.debug(
+			`Failed to get registry from package manager, using fallback: ${error instanceof Error ? error.message : 'Unknown error'}`
+		);
+	}
+
+	_registry = fallback;
+	return fallback;
+}
+
+function isValidUrl(url: string): boolean {
+	try {
+		const parsedUrl = new URL(url);
+		return !!parsedUrl.host && ['http:', 'https:'].includes(parsedUrl.protocol);
+	} catch (e) {
+		if (e instanceof Error) throw new Error('Unable to parse or verify URL', e);
+		throw new Error('Unable to parse or verify URL: Unknown Error');
+	}
 }
