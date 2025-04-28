@@ -33,8 +33,8 @@ importers:
         specifier: ^5.46.0
         version: 5.46.0(@types/node@22.10.5)(typescript@5.7.3)
       pkg-pr-new:
-        specifier: ^0.0.42
-        version: 0.0.42
+        specifier: ^0.0.43
+        version: 0.0.43
       typescript:
         specifier: ^5.7.3
         version: 5.7.3
@@ -61,7 +61,7 @@ importers:
         version: 5.4.1
       commander:
         specifier: ^13.0.0
-        version: 13.0.0
+        version: 13.1.0
       package-json:
         specifier: ^10.0.1
         version: 10.0.1
@@ -110,7 +110,7 @@ importers:
         version: 0.9.1
       '@commander-js/extra-typings':
         specifier: ^13.0.0
-        version: 13.0.0(commander@13.0.0)
+        version: 13.1.0(commander@13.1.0)
       ansi-escapes:
         specifier: ^7.0.0
         version: 7.0.0
@@ -125,7 +125,7 @@ importers:
         version: 5.0.0
       commander:
         specifier: ^13.0.0
-        version: 13.0.0
+        version: 13.1.0
       figlet:
         specifier: ^1.8.0
         version: 1.8.0
@@ -287,11 +287,6 @@ packages:
 
   '@clack/prompts@0.9.1':
     resolution: {integrity: sha512-JIpyaboYZeWYlyP0H+OoPPxd6nqueG/CmN6ixBiNFsIDHREevjIf0n0Ohh5gr5C8pEDknzgvz+pIJ8dMhzWIeg==}
-
-  '@commander-js/extra-typings@13.0.0':
-    resolution: {integrity: sha512-4or44L3saI49QRBvdSzfCtzqONlFg0/qy0Cfl+LRynDaxlGs7r2KRTLCELaAoKh4oQguICxRwQfm77/Up+0wTw==}
-    peerDependencies:
-      commander: ~13.0.0
 
   '@commander-js/extra-typings@13.1.0':
     resolution: {integrity: sha512-q5P52BYb1hwVWE6dtID7VvuJWrlfbCv4klj7BjUUOqMz4jbSZD4C9fJ9lRjL2jnBGTg+gDDlaXN51rkWcLk4fg==}
@@ -958,10 +953,6 @@ packages:
     resolution: {integrity: sha512-JQHZ2QMW6l3aH/j6xCqQThY/9OH4D/9ls34cgkUBiEeocRTU04tHfKPBsUK1PqZCUQM7GiA0IIXJSuXHI64Kbg==}
     engines: {node: '>=0.8'}
 
-  commander@13.0.0:
-    resolution: {integrity: sha512-oPYleIY8wmTVzkvQq10AEok6YcTC4sRUBl8F9gVuwchGVUCTbl/vhLTaQqutuuySYOsu8YTgV+OxKc/8Yvx+mQ==}
-    engines: {node: '>=18'}
-
   commander@13.1.0:
     resolution: {integrity: sha512-/rFeCpNJQbhSZjGVwO9RFV3xPqbnERS8MmIQzCtD/zl6gpJuV/bMLuN92oG3F7d8oDEHHRrujSXNUr8fpjntKw==}
     engines: {node: '>=18'}
@@ -1403,8 +1394,8 @@ packages:
     resolution: {integrity: sha512-uB80kBFb/tfd68bVleG9T5GGsGPjJrLAUpR5PZIrhBnIaRTQRjqdJSsIKkOP6OAIFbj7GOrcudc5pNjZ+geV2g==}
     engines: {node: '>=6'}
 
-  pkg-pr-new@0.0.42:
-    resolution: {integrity: sha512-Fgx4PRJyjEaT5iicEHi08ENNhejOi4Fq2buord/ubGbFoo86VZRZuKzmZ2AKxdFV+zk5e79VgRjCIyGDOXnwYg==}
+  pkg-pr-new@0.0.43:
+    resolution: {integrity: sha512-BxadQyJbbt7BtInyg82I73ztPOftPmDF1ttpTiJ1FpCp4p3zt5sXvDLm3V1GA8ukxa8MSvsI1+BJmsR54FLBpg==}
     hasBin: true
 
   pkg-types@1.2.1:
@@ -1482,11 +1473,6 @@ packages:
 
   safer-buffer@2.1.2:
     resolution: {integrity: sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==}
-
-  semver@7.6.3:
-    resolution: {integrity: sha512-oVekP1cKtI+CTDvHWYFUcMtsK/00wmAEfyqKfNdARm8u1wNVhSgaX7A8d4UuIlUI5e84iEwOhs7ZPYRmzU9U6A==}
-    engines: {node: '>=10'}
-    hasBin: true
 
   semver@7.7.1:
     resolution: {integrity: sha512-hlq8tAfn0m/61p4BVRcPzIGr6LKiMwo4VM6dGi6pt4qcRkmNzTcWq6eCEjEh+qXjkMDvPlOFFSGwQjoEa6gyMA==}
@@ -1900,7 +1886,7 @@ snapshots:
       package-manager-detector: 0.2.7
       picocolors: 1.1.1
       resolve-from: 5.0.0
-      semver: 7.6.3
+      semver: 7.7.1
       spawndamnit: 3.0.1
       term-size: 2.2.1
 
@@ -2014,10 +2000,6 @@ snapshots:
       '@clack/core': 0.4.1
       picocolors: 1.1.1
       sisteransi: 1.0.5
-
-  '@commander-js/extra-typings@13.0.0(commander@13.0.0)':
-    dependencies:
-      commander: 13.0.0
 
   '@commander-js/extra-typings@13.1.0(commander@13.1.0)':
     dependencies:
@@ -2523,8 +2505,6 @@ snapshots:
   clone@1.0.4:
     optional: true
 
-  commander@13.0.0: {}
-
   commander@13.1.0: {}
 
   commander@4.1.1: {}
@@ -2906,7 +2886,7 @@ snapshots:
       ky: 1.7.4
       registry-auth-token: 5.0.3
       registry-url: 6.0.1
-      semver: 7.6.3
+      semver: 7.7.1
 
   package-manager-detector@0.2.7: {}
 
@@ -2934,7 +2914,7 @@ snapshots:
 
   pify@4.0.1: {}
 
-  pkg-pr-new@0.0.42:
+  pkg-pr-new@0.0.43:
     dependencies:
       '@jsdevtools/ez-spawn': 3.0.4
       '@octokit/action': 6.1.0
@@ -3046,8 +3026,6 @@ snapshots:
       queue-microtask: 1.2.3
 
   safer-buffer@2.1.2: {}
-
-  semver@7.6.3: {}
 
   semver@7.7.1: {}
 
