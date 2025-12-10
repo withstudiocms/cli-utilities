@@ -40,11 +40,11 @@ export async function next(
 			),
 			{
 				ln0: ctx.isStudioCMSProject
-					? `Ensure your ${color.cyanBright('.env')} file is configured correctly.`
+					? `Run ${color.cyan('studiocms init')} to setup your StudioCMS project.`
 					: '',
 				ln2: `Enter your project directory using ${StudioCMSColorwayInfo(`cd ${projectDir}`)}`,
 				ln3: ctx.isStudioCMSProject
-					? `Run ${color.cyan('astro db push')} to sync your database schema.`
+					? `Run ${color.cyan('studiocms migrate')} to sync your database schema.`
 					: `Run ${color.cyan(devCmd)} to start the dev server. ${color.cyanBright('CTRL+C')} to stop.`,
 				ln4: ctx.isStudioCMSProject
 					? `Run ${color.cyan(devCmd)} to start the dev server. ${color.cyanBright('CTRL+C')} to stop.`
