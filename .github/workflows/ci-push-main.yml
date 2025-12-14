@@ -41,36 +41,14 @@ jobs:
           commit_user_email: no-reply@studiocms.dev
           commit_author: StudioCMS <no-reply@studiocms.dev>
 
-
-  changeset-release:
-    name: Changeset Release
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repo
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
-
-      - name: Install Tools & Dependencies
-        uses: withstudiocms/automations/.github/actions/install@main
-
-      - name: Run Prepublish
-        run: pnpm ci:build
-
-      - name: Create Release Pull Request or Publish to npm
-        id: changesets
-        uses: changesets/action@v1
-        with:
-            setupGitUser: true
-            commit: "👷 [ci]: Version Packages"
-            title: "👷 [ci]: Ready for Release"
-            version: pnpm ci:version
-            publish: pnpm ci:publish
-        env:
-          GITHUB_TOKEN: ${{ secrets.STUDIOCMS_SERVICE_TOKEN }}
-          NPM_TOKEN: ${{ secrets.STUDIOCMS_NPM_TOKEN }}
-
-      - name: Add Label to CI PR
-        if: ${{ steps.changesets.outputs.hasChangesets == 'true' }}
-        run: gh pr edit "$PR_URL" --add-label "ci"
-        env:
-          PR_URL: ${{ steps.changesets.outputs.pull_request_url }}
-          GITHUB_TOKEN: ${{ secrets.STUDIOCMS_SERVICE_TOKEN }}
+  release:
+    name: Release
+    permissions:
+      contents: write
+      pull-requests: write
+      id-token: write
+    secrets: inherit
+    uses: withstudiocms/automations/.github/workflows/release.yml@a08b74527cb0ddb4a392bf44d3e28b36bf282a8a # main
+    with:
+      build-cmd: "pnpm ci:build"
+      RoleMentionId: '1309310416362537020'
