@@ -88,9 +88,9 @@ async function init({ cwd }: { cwd: string }) {
 				'commit',
 				'-m',
 				'"Initial commit from StudioCMS"',
-				'--author="StudioCMS[bot] <studiocms-no-reply@users.noreply.github.com>"',
+				'--author="Apollo Git Bot[bot] <234251158+apollo-git-bot[bot]@users.noreply.github.com>"',
 			],
 			{ cwd, stdio: 'ignore' }
 		);
-	} catch {}
+	} catch { }
 }

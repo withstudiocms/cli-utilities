@@ -5,7 +5,6 @@ import { label } from '@withstudiocms/cli-kit/messages';
 import color from 'chalk';
 import {
 	dependencies,
-	env,
 	getContext,
 	git,
 	intro,
@@ -61,7 +60,6 @@ await new Command('interactive')
 			projectName,
 			template,
 			dependencies,
-			env,
 
 			// Steps which write files should go above this line
 			git,

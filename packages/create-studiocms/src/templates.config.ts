@@ -51,12 +51,26 @@ const currentTemplateRegistry: CurrentTemplateRegistry = {
 	studiocms: {
 		label: 'StudioCMS',
 		templates: {
-			blog: {
-				label: 'StudioCMS with a blog',
-				hint: 'recommended',
+			"blog/libsql": {
+				label: 'StudioCMS w/ blog frontend (LibSQL)',
 			},
-			headless: {
-				label: 'StudioCMS project with no frontend',
+			"blog/postgres": {
+				label: 'StudioCMS w/ blog frontend (PostgreSQL)',
+			},
+			"blog/mysql": {
+				label: 'StudioCMS w/ blog frontend (MySQL)',
+			},
+			"headless/libsql": {
+				label: 'StudioCMS Headless (LibSQL)',
+				hint: 'Bring your own frontend',
+			},
+			"headless/postgres": {
+				label: 'StudioCMS Headless (PostgreSQL)',
+				hint: 'Bring your own frontend',
+			},
+			"headless/mysql": {
+				label: 'StudioCMS Headless (MySQL)',
+				hint: 'Bring your own frontend',
 			},
 		},
 	},
