@@ -92,5 +92,5 @@ async function init({ cwd }: { cwd: string }) {
 			],
 			{ cwd, stdio: 'ignore' }
 		);
-	} catch { }
+	} catch {}
 }

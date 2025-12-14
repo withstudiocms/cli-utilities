@@ -1,9 +1,8 @@
 /**
  * StudioCMS Environment File Builder
- * 
+ *
  * @deprecated To be removed in the future
  */
-
 
 import crypto from 'node:crypto';
 import fs from 'node:fs/promises';
@@ -230,9 +229,9 @@ export async function env(
 					} else {
 						const dbName = customName
 							? await ctx.prompt.text({
-								message: 'Enter a custom name for the database',
-								initialValue: 'your-database-name',
-							})
+									message: 'Enter a custom name for the database',
+									initialValue: 'your-database-name',
+								})
 							: undefined;
 
 						if (typeof dbName === 'symbol') {
