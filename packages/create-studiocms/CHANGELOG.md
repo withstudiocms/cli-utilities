@@ -1,5 +1,11 @@
 # create-studiocms
 
+## 0.3.0
+
+### Minor Changes
+
+- [#35](https://github.com/withstudiocms/cli-utilities/pull/35) [`2e4c5e1`](https://github.com/withstudiocms/cli-utilities/commit/2e4c5e19dd4b87a9a64120ad98ca93be764d86c8) Thanks [@Adammatthiesen](https://github.com/Adammatthiesen)! - Reworks interactive CLI for beta.31 release
+
 ## 0.2.0
 
 ### Minor Changes
