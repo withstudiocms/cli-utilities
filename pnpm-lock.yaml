@@ -60,8 +60,8 @@ importers:
         specifier: ^5.4.1
         version: 5.4.1
       commander:
-        specifier: ^13.0.0
-        version: 13.1.0
+        specifier: ^14.0.0
+        version: 14.0.2
       package-json:
         specifier: ^10.0.1
         version: 10.0.1
@@ -956,6 +956,10 @@ packages:
   commander@13.1.0:
     resolution: {integrity: sha512-/rFeCpNJQbhSZjGVwO9RFV3xPqbnERS8MmIQzCtD/zl6gpJuV/bMLuN92oG3F7d8oDEHHRrujSXNUr8fpjntKw==}
     engines: {node: '>=18'}
+
+  commander@14.0.2:
+    resolution: {integrity: sha512-TywoWNNRbhoD0BXs1P3ZEScW8W5iKrnbithIl0YH+uCmBd0QpPOA8yc82DS3BIE5Ma6FnBVUsJ7wVUDz4dvOWQ==}
+    engines: {node: '>=20'}
 
   commander@4.1.1:
     resolution: {integrity: sha512-NOKm8xhkzAjzFx8B2v5OAHT+u5pRQc2UCa2Vq9jYL/31o2wi9mxBA7LIFs3sV5VSC49z6pEhfbMULvShKj26WA==}
@@ -2506,6 +2510,8 @@ snapshots:
     optional: true
 
   commander@13.1.0: {}
+
+  commander@14.0.2: {}
 
   commander@4.1.1: {}
 
